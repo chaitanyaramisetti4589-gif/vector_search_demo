@@ -1,0 +1,11 @@
+import chromadb
+dbclient=chromadb.Client()
+collection=dbclient.create_collection(name="embeddings")
+collection.add(documents=["Python is a popular programming language.","Artificial Intelligence helps computers perform human-like tasks.","Machine Learning is a branch of Artificial Intelligence.","Google Gemini is an AI model developed by Google.","Vector databases store text embeddings for semantic search."],ids=["id1","id2","id3","id4","id5"])
+print("=" * 50)
+print("🔍 Vector Search Demo using ChromaDB")
+print("=" * 50)
+question = input("\nEnter your question: ")
+results=collection.query(query_texts=[question],n_results=1)
+print("\n📄 Most Relevant Document:")
+print(results["documents"][0][0])
